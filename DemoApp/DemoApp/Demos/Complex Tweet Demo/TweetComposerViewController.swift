@@ -151,9 +151,9 @@ extension TweetComposerViewController: UIImagePickerControllerDelegate, UINaviga
         }
     }
 
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+    private func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         picker.dismiss(animated: true)
-        if let image = info[UIImagePickerControllerOriginalImage] as? UIImage {
+        if let image = info[UIImagePickerController.InfoKey.originalImage.rawValue] as? UIImage {
             let composer = TWTRComposerViewController(initialText: "Check out this great image: ", image: image, videoURL: nil)
             composer.delegate = self
             self.present(composer, animated: true)

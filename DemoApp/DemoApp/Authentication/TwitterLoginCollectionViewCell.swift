@@ -48,7 +48,7 @@ class TwitterLoginCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Actions
 
-    func addAccount() {
+    @objc func addAccount() {
         delegate?.loginCollectionViewCellDidTapAddAccountButton(cell: self)
     }
 

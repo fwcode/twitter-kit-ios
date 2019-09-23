@@ -43,7 +43,7 @@ class HomeViewController: DemoCollectionViewController {
 
     // MARK: - Actions
 
-    func didTapProfile() {
+    @objc func didTapProfile() {
         delegate?.homeViewControllerDidTapProfileButton(viewController: self)
     }
 }

@@ -18,15 +18,40 @@
 #import "TWTRWebViewController.h"
 #import <TwitterCore/TWTRAuthenticationConstants.h>
 
-@interface TWTRWebViewController () <UIWebViewDelegate>
+@interface TWTRWebViewController () <WKNavigationDelegate>
 
-@property (nonatomic, strong) UIWebView *webView;
+@property (nonatomic, strong) WKWebView *webView;
 @property (nonatomic, assign) BOOL showCancelButton;
 @property (nonatomic, copy) TWTRWebViewControllerCancelCompletion cancelCompletion;
 
 @end
 
 @implementation TWTRWebViewController
+
+// Conversion from UIWebViewNavigationType to WKNavigationType
++ (UIWebViewNavigationType)_enumHelperForNavigationType:(WKNavigationType)wkNavigationType {
+    switch (wkNavigationType) {
+        case WKNavigationTypeLinkActivated:
+            return UIWebViewNavigationTypeLinkClicked;
+            break;
+        case WKNavigationTypeFormSubmitted:
+            return UIWebViewNavigationTypeFormSubmitted;
+            break;
+        case WKNavigationTypeBackForward:
+            return UIWebViewNavigationTypeBackForward;
+            break;
+        case WKNavigationTypeReload:
+            return UIWebViewNavigationTypeReload;
+            break;
+        case WKNavigationTypeFormResubmitted:
+            return UIWebViewNavigationTypeFormResubmitted;
+            break;
+        case WKNavigationTypeOther:
+        default:
+            return UIWebViewNavigationTypeOther;
+            break;
+    }
+}
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
 {
@@ -65,30 +90,32 @@
 
 - (void)loadView
 {
-    [self setWebView:[[UIWebView alloc] init]];
-    [[self webView] setScalesPageToFit:YES];
-    [[self webView] setDelegate:self];
+    [self initWebView];
     [self setView:[self webView]];
 }
 
-#pragma mark - UIWebview delegate
+#pragma mark - WKWebview delegate
 
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType
-{
+- (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler {
+    NSURLRequest* request = navigationAction.request;
     if (![self whitelistedDomain:request]) {
         // Open in Safari if request is not whitelisted
         NSLog(@"Opening link in Safari browser, as the host is not whitelisted: %@", request.URL);
         [[UIApplication sharedApplication] openURL:request.URL];
-        return NO;
+        decisionHandler(WKNavigationActionPolicyCancel);
+        return;
     }
+    WKNavigationActionPolicy decision = WKNavigationActionPolicyAllow;
     if ([self shouldStartLoadWithRequest]) {
-        return [self shouldStartLoadWithRequest](self, request, navigationType);
+        if (![self shouldStartLoadWithRequest](self, request, [TWTRWebViewController _enumHelperForNavigationType:navigationAction.navigationType])) {
+            decision = WKNavigationActionPolicyCancel;
+        };
     }
-    return YES;
+
+    decisionHandler(decision);
 }
 
-- (void)webView:(UIWebView *)webView didFailLoadWithError:(NSError *)error
-{
+- (void)webView:(WKWebView *)webView didFailNavigation:(WKNavigation *)navigation withError:(NSError *)error {
     if (self.errorHandler) {
         self.errorHandler(error);
         self.errorHandler = nil;
@@ -120,4 +147,21 @@
     [self setCancelCompletion:cancelCompletion];
 }
 
+- (void)initWebView {
+    // From: https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit
+    NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
+    
+    WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
+    WKUserContentController *wkUController = [[WKUserContentController alloc] init];
+    [wkUController addUserScript:wkUScript];
+    
+    WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
+    wkWebConfig.userContentController = wkUController;
+    
+    WKWebView* wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebConfig];
+
+    [self setWebView:wkWebV];
+    [[self webView] setNavigationDelegate:self];
+
+}
 @end

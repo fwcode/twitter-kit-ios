@@ -17,11 +17,11 @@ struct RootAnimationController {
     func transition(using transitionContext: RootTransitionContext) {
         let toViewController = transitionContext.toViewController
 
-        transitionContext.contentViewController.addChildViewController(toViewController)
+        transitionContext.contentViewController.addChild(toViewController)
         toViewController.view.frame = transitionContext.contentViewController.view.bounds
         transitionContext.contentViewController.view.addSubview(toViewController.view)
-        transitionContext.fromViewController?.willMove(toParentViewController: nil)
-        transitionContext.toViewController.willMove(toParentViewController: transitionContext.contentViewController)
+        transitionContext.fromViewController?.willMove(toParent: nil)
+        transitionContext.toViewController.willMove(toParent: transitionContext.contentViewController)
 
         animateTransition(using: transitionContext)
     }
@@ -41,7 +41,7 @@ struct RootAnimationController {
 
     private func handleAnimationCompletion(using transitionContext: RootTransitionContext?) {
         transitionContext?.fromViewController?.view.removeFromSuperview()
-        transitionContext?.fromViewController?.removeFromParentViewController()
+        transitionContext?.fromViewController?.removeFromParent()
         if let constraints = transitionContext?.fromViewController?.view.constraints {
             transitionContext?.fromViewController?.view.removeConstraints(constraints)
         }

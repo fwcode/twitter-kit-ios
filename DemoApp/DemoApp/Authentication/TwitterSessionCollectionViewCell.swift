@@ -112,7 +112,7 @@ class TwitterSessionCollectionViewCell: UICollectionViewCell {
 
     // MARK: - Actions
 
-    func logout() {
+    @objc func logout() {
         if let session = session {
             delegate?.sessionCollectionViewCell(collectionViewCell: self, didTapLogoutFor: session)
         }

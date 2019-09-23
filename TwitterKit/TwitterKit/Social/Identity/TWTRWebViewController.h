@@ -20,6 +20,7 @@
  */
 
 #import <UIKit/UIKit.h>
+#import <WebKit/WebKit.h>
 
 @class TWTRWebViewController;
 
@@ -27,7 +28,7 @@ typedef BOOL (^TWTRWebViewControllerShouldLoadCompletion)(UIViewController *cont
 typedef void (^TWTRWebViewControllerCancelCompletion)(TWTRWebViewController *webViewController);
 typedef void (^TWTRWebViewControllerHandleError)(NSError *error);
 
-@interface TWTRWebViewController : UIViewController
+@interface TWTRWebViewController : UIViewController <WKNavigationDelegate>
 
 @property (nonatomic, strong) NSURLRequest *request;
 @property (nonatomic, copy) TWTRWebViewControllerShouldLoadCompletion shouldStartLoadWithRequest;

@@ -76,7 +76,7 @@ class AuthenticationViewController: UIViewController {
 
     // MARK: - Actions
 
-    func home() {
+    @objc func home() {
         delegate?.authenticationViewControllerDidTapHome(viewController: self)
     }
 

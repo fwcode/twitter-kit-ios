@@ -10,7 +10,7 @@ import Foundation
 
 
 extension UIViewController {
-    func addVisualConstraints(format: String, views: [String: AnyObject], options: NSLayoutFormatOptions = [], metrics: [String : AnyObject]? = nil) {
+    func addVisualConstraints(format: String, views: [String: AnyObject], options: NSLayoutConstraint.FormatOptions = [], metrics: [String : AnyObject]? = nil) {
         let constraints = NSLayoutConstraint.constraints(withVisualFormat: format, options: options, metrics: metrics, views: views)
         constraints.forEach { $0.isActive = true }
     }

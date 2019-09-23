@@ -1,3 +1,25 @@
+**How to build and use your customized TwitterKit pod**
+1. Open the DemoApp project and there is a sub project TwitterKit.
+2. Select schema: TwitterKit ==> Generic iOS Device, `Clean`, `Run` and you get a TwitterKit.framework with architecture: armv7, arm64
+3. Select schema: TwitterKit ==> any iOS Simulator, `Clean`, `Run` and you get a  TwitterKit.framework with architecture: x86_64
+4. Use `lipo` to merge above two framework into one, which include architecture: armv7, arm64, x84_64
+    ```
+    lipo -create -output TwitterKit <Framework built in step 2>/TwitterKit <Framework built in step 3>/TwitterKit
+    ```
+    Check the new TwitterKit is correct.
+    ```
+    lipo -archs TwitterKit
+    ```
+    Will return `x86_64 armv7 arm64 `
+
+5. Replace the `TwitterKit` in framework created in step 2 with the merged one.
+6. Create a folder `iOS`, move the framework folder in step 5 inside, zip the `iOS` folder and you get TwitterKit pod zip file.
+7. Upload the zip file somewhere and get a [URL](https://swarm-dev.s3.amazonaws.com/pods/twitterkit/ios/5.0.0/TwitterKit.zip) points to it.
+8. Change your [podspec file](https://raw.githubusercontent.com/touren/twitter-kit-ios/Swift5/TwitterKit/TwitterKit.podspec) as:  s.source = { :http => "<URL created in step 7>" }
+9. Change your Podfile as: `pod "TwitterKit"` ==> `pod "TwitterKit", :podspec => "<URL point to the podspec created in step 8>"`
+
+----
+
 **Twitter will be discontinuing support for Twitter Kit on October 31, 2018. [Read the blog post here](https://blog.twitter.com/developer/en_us/topics/tools/2018/discontinuing-support-for-twitter-kit-sdk.html).**
 
 # Twitter Kit for iOS
