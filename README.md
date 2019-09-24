@@ -1,4 +1,9 @@
-**How to build and use your customized TwitterKit pod**
+**How to use the customized TwitterKit pod**
+```
+pod 'TwitterKit5'
+```
+
+**How to build and use the customized TwitterKit pod**
 1. Open the DemoApp project and there is a sub project TwitterKit.
 2. Select schema: TwitterKit ==> Generic iOS Device, `Clean`, `Run` and you get a TwitterKit.framework with architecture: armv7, arm64
 3. Select schema: TwitterKit ==> any iOS Simulator, `Clean`, `Run` and you get a  TwitterKit.framework with architecture: x86_64
