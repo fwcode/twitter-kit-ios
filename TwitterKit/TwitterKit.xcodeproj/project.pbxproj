@@ -3575,6 +3575,7 @@
 				BITCODE_GENERATION_MODE = bitcode;
 				CODE_SIGN_IDENTITY = "";
 				ENABLE_BITCODE = YES;
+				MARKETING_VERSION = 5.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -3592,6 +3593,7 @@
 				BITCODE_GENERATION_MODE = bitcode;
 				CODE_SIGN_IDENTITY = "";
 				ENABLE_BITCODE = YES;
+				MARKETING_VERSION = 5.0.2;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
