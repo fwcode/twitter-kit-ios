@@ -150,15 +150,15 @@
 - (void)initWebView {
     // From: https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit
     NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
-    
+
     WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
     WKUserContentController *wkUController = [[WKUserContentController alloc] init];
     [wkUController addUserScript:wkUScript];
-    
+
     WKWebViewConfiguration *wkWebConfig = [[WKWebViewConfiguration alloc] init];
     wkWebConfig.userContentController = wkUController;
-    
-    WKWebView* wkWebV = [[WKWebView alloc] initWithFrame:self.view.frame configuration:wkWebConfig];
+
+    WKWebView* wkWebV = [[WKWebView alloc] initWithFrame: self.parentViewController.view.frame configuration:wkWebConfig];
 
     [self setWebView:wkWebV];
     [[self webView] setNavigationDelegate:self];
