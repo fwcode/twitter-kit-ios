@@ -19,10 +19,10 @@ pod 'TwitterKit5'
 ./build.sh
 ```
 2. Release a new version in [GitHub](https://github.com/touren/twitter-kit-ios/releases), say 5.0.2, upload the TwitterKit.zip just built.
-3. Update TwitterKi5.podspec, make sure `s.version` and `s.source` is correct.
+3. Update TwitterKit5.podspec, make sure `s.version` and `s.source` is correct.
 4. Deploy to [CocoaPods Trunk](https://guides.cocoapods.org/making/getting-setup-with-trunk.html)
 ```
-pod trunk push TwitterKi5.podspec
+pod trunk push TwitterKit5.podspec
 ```
 
 ----
