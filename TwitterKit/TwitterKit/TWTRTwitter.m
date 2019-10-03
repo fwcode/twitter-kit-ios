@@ -379,9 +379,11 @@ static TWTRTwitter *sharedTwitter;
 
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary *)options
 {
+    // Bug fixed: https://github.com/twitter-archive/twitter-kit-ios/issues/122
+    // Use the code from HackingGate(github.com), https://github.com/touren/twitter-kit-ios/pull/2
     NSString *sourceApplication = options[UIApplicationOpenURLOptionsSourceApplicationKey];
-    BOOL isSSOBundle = [self.mobileSSO isSSOWithSourceApplication:sourceApplication];
-    BOOL isWeb = [self.mobileSSO isWebWithSourceApplication:sourceApplication];
+    BOOL isSSOBundle = sourceApplication == nil ? [self.mobileSSO isSSOWithURL:url] : [self.mobileSSO isSSOWithSourceApplication:sourceApplication];
+    BOOL isWeb = sourceApplication == nil ? [self.mobileSSO isWebWithURL:url] : [self.mobileSSO isWebWithSourceApplication:sourceApplication];
 
     if (isSSOBundle) {
         [self.mobileSSO processRedirectURL:url];

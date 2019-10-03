@@ -10,6 +10,7 @@
 		191FF0FFCC8156460546E43A /* Pods_DemoApp.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 0E13E2EBAF8AC955FF850B86 /* Pods_DemoApp.framework */; };
 		2001BA381FA0EF0F0074EA67 /* Config.xcconfig in Resources */ = {isa = PBXBuildFile; fileRef = 2001BA371FA0EF0F0074EA67 /* Config.xcconfig */; };
 		20ABD1D71F0188DD00DCA2E0 /* TweetCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 20ABD1D61F0188DC00DCA2E0 /* TweetCollectionViewController.swift */; };
+		2BB65BAD234654280090B40E /* WebKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 2BB65BA8234654280090B40E /* WebKit.framework */; };
 		377340651ECA3D080065FFE0 /* DeletedTweet.json in Resources */ = {isa = PBXBuildFile; fileRef = 377340641ECA3D080065FFE0 /* DeletedTweet.json */; };
 		377783891E96AF1700BC4830 /* TwitterKitResources.bundle in Resources */ = {isa = PBXBuildFile; fileRef = 377783881E96AF1700BC4830 /* TwitterKitResources.bundle */; };
 		3777838B1E96AFD500BC4830 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3777838A1E96AFD500BC4830 /* Images.xcassets */; };
@@ -168,6 +169,7 @@
 		0E13E2EBAF8AC955FF850B86 /* Pods_DemoApp.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_DemoApp.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		2001BA371FA0EF0F0074EA67 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Config.xcconfig; path = ../Config.xcconfig; sourceTree = "<group>"; };
 		20ABD1D61F0188DC00DCA2E0 /* TweetCollectionViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TweetCollectionViewController.swift; sourceTree = "<group>"; };
+		2BB65BA8234654280090B40E /* WebKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = WebKit.framework; path = System/Library/Frameworks/WebKit.framework; sourceTree = SDKROOT; };
 		3733E29D1EA8276800E95681 /* TwitterShareExtensionUIResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; path = TwitterShareExtensionUIResources.bundle; sourceTree = BUILT_PRODUCTS_DIR; };
 		377340641ECA3D080065FFE0 /* DeletedTweet.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = DeletedTweet.json; sourceTree = "<group>"; };
 		377783881E96AF1700BC4830 /* TwitterKitResources.bundle */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.plug-in"; name = TwitterKitResources.bundle; path = ../TwitterKit/TwitterKitResources.bundle; sourceTree = "<group>"; };
@@ -249,6 +251,7 @@
 				191FF0FFCC8156460546E43A /* Pods_DemoApp.framework in Frameworks */,
 				377941671E96DBCF0049A022 /* FLEX.framework in Frameworks */,
 				377941681E96DBCF0049A022 /* MoPub.framework in Frameworks */,
+				2BB65BAD234654280090B40E /* WebKit.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -361,6 +364,7 @@
 		A7BC0A74110949C5A64504DE /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				2BB65BA8234654280090B40E /* WebKit.framework */,
 				AA3E099520119D3F00792255 /* MapKit.framework */,
 				AAEE1AF81FACCC8300F11160 /* SafariServices.framework */,
 				377941601E96DBCF0049A022 /* DCIntrospect_ARC.framework */,
