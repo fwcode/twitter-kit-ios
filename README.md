@@ -10,7 +10,7 @@ pod 'TwitterKit5'
 ```
 2. Upload the TwitterKit.zip file somewhere and get a [URL](https://swarm-dev.s3.amazonaws.com/pods/twitterkit/ios/5.0.0/TwitterKit.zip) points to it.
 3. Change your [podspec file](https://raw.githubusercontent.com/touren/twitter-kit-ios/Swift5/TwitterKit/TwitterKit.podspec) as:  s.source = { :http => "<URL created in step 2>" }
-4. Change your Podfile as: `pod "TwitterKit"` ==> `pod "TwitterKit", :podspec => "<URL point to the podspec created in step 8>"`
+4. Change your Podfile as: `pod "TwitterKit"` ==> `pod "TwitterKit", :podspec => "<URL point to the podspec created in step 3>"`
 
 
 **How to build and push to CocoaPods TwitterKit5**
