@@ -3,9 +3,9 @@ Pod::Spec.new do |s|
   s.version = "5.0.3"
   s.summary = "Increase user engagement and app growth."
   s.homepage = "https://github.com/touren/twitter-kit-ios"
-  s.documentation_url = "https://github.com/twitter/twitter-kit-ios/wiki"
-  s.social_media_url = "https://twitter.com/TwitterDev"
-  s.authors = "Twitter"
+  s.documentation_url = "https://github.com/touren/twitter-kit-ios/wiki"
+  s.social_media_url = "https://taoren.me"
+  s.authors = "Tao Ren"
   s.platform = :ios, "9.0"
   s.source = { :http => "https://github.com/touren/twitter-kit-ios/releases/download/v#{s.version}/TwitterKit.zip" }
   s.vendored_frameworks = "iOS/TwitterKit.framework"
