@@ -4,7 +4,7 @@
 xcodebuild \
     -project TwitterKit/TwitterKit.xcodeproj \
     -scheme TwitterKit -configuration Debug \
-    -sdk "iphonesimulator13.0" \
+    -sdk "iphonesimulator" \
     HEADER_SEARCH_PATHS="$(pwd)/TwitterCore/iphonesimulator/Headers $(pwd)/TwitterCore/iphonesimulator/PrivateHeaders"  \
     CONFIGURATION_BUILD_DIR=./iphonesimulator \
     clean build
@@ -13,7 +13,7 @@ xcodebuild \
 xcodebuild \
     -project TwitterKit/TwitterKit.xcodeproj \
     -scheme TwitterKit -configuration Debug \
-    -sdk "iphoneos13.0" \
+    -sdk "iphoneos" \
     HEADER_SEARCH_PATHS="$(pwd)/TwitterCore/iphoneos/Headers $(pwd)/TwitterCore/iphoneos/PrivateHeaders"  \
     CONFIGURATION_BUILD_DIR=./iphoneos \
     clean build
