@@ -401,6 +401,29 @@ static TWTRTwitter *sharedTwitter;
     return NO;
 }
 
+- (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts API_AVAILABLE(ios(13.0)) {
+    for (UIOpenURLContext *context in URLContexts) {
+        NSURL *url = context.URL;
+        NSString *sourceApplication = context.options.sourceApplication;
+        BOOL isSSOBundle = sourceApplication == nil ? [self.mobileSSO isSSOWithURL:url] : [self.mobileSSO isSSOWithSourceApplication:sourceApplication];
+        BOOL isWeb = sourceApplication == nil ? [self.mobileSSO isWebWithURL:url] : [self.mobileSSO isWebWithSourceApplication:sourceApplication];
+
+        if (isSSOBundle) {
+            [self.mobileSSO processRedirectURL:url];
+            return;
+        } else if (isWeb) {
+            BOOL isTokenValid = [self.mobileSSO verifyOauthTokenResponsefromURL:url];
+            if (isTokenValid) {
+                // If it wasn't a Mobile SSO redirect, try to handle as
+                // SFSafariViewController redirect
+                [self.webAuthenticationFlow resumeAuthenticationWithRedirectURL:url];
+                return;
+            }
+        }
+    }
+    [self.mobileSSO triggerInvalidSourceError];
+}
+
 #pragma mark - TwitterCore
 
 - (NSURL *)applicationDocumentsDirectory

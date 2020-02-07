@@ -121,6 +121,19 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (BOOL)application:(UIApplication *)application openURL:(NSURL *)url options:(NSDictionary *)options;
 
+/**
+*  Finish the `SFSafariViewController` authentication loop. This method should
+*  be called from scene:openURLContexts inside the scene delegate.
+*
+*  This method will verify an authentication token sent by the Twitter API to
+*  finish the web-based authentication flow.
+*
+*  @param scene  The scene that UIKit asks to open the URL.
+*  @param URLContexts          One or more UIOpenURLContext objects. Each object contains one URL to open and any additional information needed to open that URL.
+*
+*/
+- (void)scene:(UIScene *)scene openURLContexts:(nonnull NSSet<UIOpenURLContext *> *)URLContexts API_AVAILABLE(ios(13.0));
+
 @end
 
 NS_ASSUME_NONNULL_END

@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 ## Build TwitterKit.framework - x86_64
 xcodebuild \
     -project TwitterKit/TwitterKit.xcodeproj \
