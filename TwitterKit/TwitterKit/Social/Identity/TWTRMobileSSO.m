@@ -77,9 +77,7 @@
 - (BOOL)isSSOWithURL:(NSURL *)url
 {
     if (url == nil) return NO;
-    return [url.host containsString:@"secret="] &&
-    [url.host containsString:@"secret="] &&
-    [url.host containsString:@"username="] ;
+    return [self.loginURLParser isTwitterKitRedirectURL:url];
 }
 
 - (BOOL)isWebWithURL:(NSURL *)url
