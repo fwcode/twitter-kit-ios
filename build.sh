@@ -11,6 +11,13 @@ xcodebuild \
     CONFIGURATION_BUILD_DIR=./iphonesimulator \
     clean build
 
+## From: https://developer.apple.com/library/archive/qa/qa1940/_index.html
+# If code signing fails with the error "resource fork, Finder information, or similar detritus not allowed."
+#   e.g. /usr/bin/codesign --force --sign - --timestamp=none $(pwd)/TwitterCore/iphonesimulator/TwitterCore.framework
+# Try:
+#   xattr -lr /Users/SWARM5/Work/twitter-kit-ios-master/TwitterKit/iphonesimulator/TwitterKit.framework
+#   xattr -cr /Users/SWARM5/Work/twitter-kit-ios-master/TwitterKit/iphonesimulator/TwitterKit.framework
+
 ## Build TwitterKit.framework - armv7, arm64
 xcodebuild \
     -project TwitterKit/TwitterKit.xcodeproj \
@@ -28,6 +35,9 @@ lipo -create -output iOS/TwitterKit.framework/TwitterKit TwitterKit/iphoneos/Twi
 lipo -archs iOS/TwitterKit.framework/TwitterKit
 
 ## Zip them into TwitterKit.zip
-rm TwitterKit.zip
-zip -r TwitterKit.zip iOS/*
+ZIP_FILE=TwitterKit.zip
+if test -f "$ZIP_FILE"; then
+    rm "$ZIP_FILE"
+fi
+zip -r "$ZIP_FILE" iOS/*
 rm -rf iOS
