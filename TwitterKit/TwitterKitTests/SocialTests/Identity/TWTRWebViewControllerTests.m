@@ -19,12 +19,15 @@
 #import "TWTRTestCase.h"
 #import "TWTRWebViewController.h"
 
+#import <SafariServices/SafariServices.h>
+#import <WebKit/WebKit.h>
+
 @interface TWTRWebViewController () <WKNavigationDelegate>
 
 @property (nonatomic, readonly) WKWebView *webView;
 
 - (void)webView:(WKWebView *)webView decidePolicyForNavigationAction:(WKNavigationAction *)navigationAction decisionHandler:(void (^)(WKNavigationActionPolicy))decisionHandler;
-- (BOOL)webView:(UIWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(UIWebViewNavigationType)navigationType;
+- (BOOL)webView:(WKWebView *)webView shouldStartLoadWithRequest:(NSURLRequest *)request navigationType:(WKNavigationType)navigationType;
 
 }
 
@@ -41,7 +44,7 @@
 - (void)setUp
 {
     [super setUp];
-    TWTRWebViewControllerShouldLoadCompletion shouldLoadCompletion = ^BOOL(UIViewController *controller, NSURLRequest *urlRequest, UIWebViewNavigationType navType) {
+    TWTRWebViewControllerShouldLoadCompletion shouldLoadCompletion = ^BOOL(UIViewController *controller, NSURLRequest *urlRequest, WKNavigationType navType) {
         return YES;
     };
     self.webVC = [[TWTRWebViewController alloc] init];

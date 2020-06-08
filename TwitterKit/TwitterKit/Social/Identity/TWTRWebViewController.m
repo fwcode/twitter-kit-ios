@@ -28,29 +28,8 @@
 
 @implementation TWTRWebViewController
 
-// Conversion from UIWebViewNavigationType to WKNavigationType
-+ (UIWebViewNavigationType)_enumHelperForNavigationType:(WKNavigationType)wkNavigationType {
-    switch (wkNavigationType) {
-        case WKNavigationTypeLinkActivated:
-            return UIWebViewNavigationTypeLinkClicked;
-            break;
-        case WKNavigationTypeFormSubmitted:
-            return UIWebViewNavigationTypeFormSubmitted;
-            break;
-        case WKNavigationTypeBackForward:
-            return UIWebViewNavigationTypeBackForward;
-            break;
-        case WKNavigationTypeReload:
-            return UIWebViewNavigationTypeReload;
-            break;
-        case WKNavigationTypeFormResubmitted:
-            return UIWebViewNavigationTypeFormResubmitted;
-            break;
-        case WKNavigationTypeOther:
-        default:
-            return UIWebViewNavigationTypeOther;
-            break;
-    }
++ (WKNavigationType)_enumHelperForNavigationType:(WKNavigationType)wkNavigationType {
+    return WKNavigationTypeOther;
 }
 
 - (id)initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil
@@ -148,7 +127,6 @@
 }
 
 - (void)initWebView {
-    // From: https://stackoverflow.com/questions/26295277/wkwebview-equivalent-for-uiwebviews-scalespagetofit
     NSString *jScript = @"var meta = document.createElement('meta'); meta.setAttribute('name', 'viewport'); meta.setAttribute('content', 'width=device-width'); document.getElementsByTagName('head')[0].appendChild(meta);";
 
     WKUserScript *wkUScript = [[WKUserScript alloc] initWithSource:jScript injectionTime:WKUserScriptInjectionTimeAtDocumentEnd forMainFrameOnly:YES];
