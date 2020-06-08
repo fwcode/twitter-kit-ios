@@ -3574,8 +3574,9 @@
 			buildSettings = {
 				BITCODE_GENERATION_MODE = bitcode;
 				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1035;
 				ENABLE_BITCODE = YES;
-				MARKETING_VERSION = 5.1.0;
+				MARKETING_VERSION = 5.1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
@@ -3592,8 +3593,9 @@
 			buildSettings = {
 				BITCODE_GENERATION_MODE = bitcode;
 				CODE_SIGN_IDENTITY = "";
+				CURRENT_PROJECT_VERSION = 1035;
 				ENABLE_BITCODE = YES;
-				MARKETING_VERSION = 5.1.0;
+				MARKETING_VERSION = 5.1.1;
 				OTHER_LDFLAGS = (
 					"$(inherited)",
 					"-ObjC",
